@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_agregar_pensamiento">AgregarPensamiento</string>
     <string name="title_activity_pensamientos">Pensamientos</string>
+    <string name="title_activity_pensamiento">PensamientoActivity</string>
 
 </resources>

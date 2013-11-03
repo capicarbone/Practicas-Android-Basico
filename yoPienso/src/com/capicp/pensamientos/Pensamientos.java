@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class Pensamientos extends Activity {
+	
+	ArrayList<String> lista = new ArrayList<String>();		
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +27,7 @@ public class Pensamientos extends Activity {
 		
 		String[] columnas = new String[2];
 		columnas[0] = "pensamiento";
-		columnas[1] = "autor";
-		
-		ArrayList<String> lista = new ArrayList<String>();		
+		columnas[1] = "autor";		
 		
 		SQLHelper helper = new SQLHelper(this);
 		SQLiteDatabase bd = helper.getReadableDatabase();
@@ -42,6 +46,21 @@ public class Pensamientos extends Activity {
 		
 		
 		lista_vista.setAdapter(adaptador);
+		
+		
+		
+		lista_vista.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View vista, int posicion,
+					long id) {
+				
+					Intent pensamiento_intento = new Intent( vista.getContext(), PensamientoActivity.class);
+					pensamiento_intento.putExtra("pensamiento", (String) lista.get(posicion));
+					startActivity(pensamiento_intento);
+			}
+			
+		});
 	}
 
 	@Override
